@@ -11,23 +11,22 @@ padding : 0 14vw;
 }
 
 & #carddiv  {
-    border : 2px solid black;
+    //border : 2px solid black;
     display : grid;
     grid-template-columns : repeat(3,1fr);
-    grid-auto-rows : 60vh;
-    gap : 3vw;
+    grid-auto-rows : 90vh;
+    gap : 2vw;
 }
-    
 
 `
 
-export default function ContentBody(){
+export default function ContentBody({selectedItems,setSelectedItems}){
     return (
         <>
         <StyleDiv>
             <h3 className='title'>ELEGANT CLOTHING FOR EVERYONE</h3>
             <div id = 'carddiv'>
-                {itemsArray.map((item,index) => <Cards product={item.product} cost = {item.cost} description = {item.Description} key={index}/>)}
+                {itemsArray.map((item,index) => <Cards product={item.product} cost = {item.cost} description = {item.Description} key={index} image={item.src} setSelectedItems = {setSelectedItems} selectedItems = {selectedItems}/>)}
             </div>
         </StyleDiv>  
         </>

@@ -4,12 +4,12 @@ import ContentBody from './components/ContentBody'
 
 
 function App() {
-  
+  const [selectedItems,setSelectedItems] = useState([])
 
   return (
     <>
-      <Header></Header>
-      <ContentBody></ContentBody>
+      <Header selectedItems = {selectedItems}></Header>
+      <ContentBody setSelectedItems = {setSelectedItems} selectedItems = {selectedItems}></ContentBody>
     </>
   )
 }
