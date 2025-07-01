@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <Header selectedItems = {selectedItems}></Header>
+      <Header selectedItems = {selectedItems} setSelectedItems = {setSelectedItems}></Header>
       <ContentBody setSelectedItems = {setSelectedItems} selectedItems = {selectedItems}></ContentBody>
     </>
   )

@@ -39,6 +39,7 @@ export default function Cards({product,cost,description,image,setSelectedItems,s
             const newArr = [...prevItems,{
                 product : product,
                 cost : cost,
+                quantity : 1,
                 
             }]
 
