@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import {styled} from 'styled-components';
+import { CardsContext } from './ContentBody';
 const CardDiv = styled.div`
 border : 2px solid teal;
 position : relative;
@@ -29,7 +31,10 @@ font-size : 14px;
 `
 
 
-export default function Cards({product,cost,description,image,setSelectedItems,selectedItems}){
+export default function Cards(){
+
+    const {product,cost,description,image,setSelectedItems,selectedItems} = useContext(CardsContext)
+
     function AddHandler(){
         setSelectedItems((prevItems) => { 
             let a = prevItems.find((item) => item.product === product)

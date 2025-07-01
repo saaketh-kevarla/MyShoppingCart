@@ -1,5 +1,7 @@
 import {styled} from 'styled-components'
 import { itemsArray } from '../Data';
+import { createContext, useContext } from 'react';
+import { ItemsContext } from '../App';
 import Cards from './Cards';
 
 const StyleDiv = styled.div`
@@ -20,13 +22,33 @@ padding : 0 14vw;
 
 `
 
-export default function ContentBody({selectedItems,setSelectedItems}){
+export const CardsContext = createContext();
+
+export default function ContentBody(){
+
+    const {selectedItems,setSelectedItems} = useContext(ItemsContext);
+    
+
     return (
         <>
         <StyleDiv>
             <h3 className='title'>ELEGANT CLOTHING FOR EVERYONE</h3>
             <div id = 'carddiv'>
-                {itemsArray.map((item,index) => <Cards product={item.product} cost = {item.cost} description = {item.Description} key={index} image={item.src} setSelectedItems = {setSelectedItems} selectedItems = {selectedItems}/>)}
+                {/* <Cards product={item.product} cost = {item.cost} description = {item.Description} key={index} image={item.src} setSelectedItems = {setSelectedItems} selectedItems = {selectedItems}/> */}
+                {itemsArray.map((item,index) => {
+                    const cardVal = {
+                        product : item.product,
+                        cost : item.cost,
+                        description : item.Description,
+                        image : item.src,
+                        selectedItems,
+                        setSelectedItems
+                    }
+    
+
+                    return <CardsContext value={cardVal} key={index} >
+                                <Cards />
+                            </CardsContext>})}
             </div>
         </StyleDiv>  
         </>

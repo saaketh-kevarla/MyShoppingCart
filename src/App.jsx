@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import { useState,createContext } from 'react'
 import  Header  from './components/Header'
 import ContentBody from './components/ContentBody'
 
+export const ItemsContext = createContext();
 
 function App() {
   const [selectedItems,setSelectedItems] = useState([])
 
   return (
     <>
-      <Header selectedItems = {selectedItems} setSelectedItems = {setSelectedItems}></Header>
-      <ContentBody setSelectedItems = {setSelectedItems} selectedItems = {selectedItems}></ContentBody>
+      <ItemsContext value = {{selectedItems,setSelectedItems}}>
+        <Header />
+        <ContentBody />
+      </ItemsContext>
     </>
   )
 }

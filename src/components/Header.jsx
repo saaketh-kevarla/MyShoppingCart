@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 import {styled} from 'styled-components'
+import { ItemsContext } from '../App';
 
 
 const StyleDiv = styled.div`
@@ -65,7 +66,9 @@ align-items : center;
 `
 
 
-export default function Header({selectedItems,setSelectedItems}){
+export default function Header(){
+    
+    const {selectedItems,setSelectedItems} = useContext(ItemsContext)
 
     const DialogRef = useRef(null);
 
