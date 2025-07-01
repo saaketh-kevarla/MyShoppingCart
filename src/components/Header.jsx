@@ -47,6 +47,21 @@ align-items : center;
     margin-left : 630px;
 }
 
+& h3 span {
+    font-weight : bolder;
+}
+
+& .prodName { 
+    margin-right : 20vw;
+    border : 1px solid black;
+    width : 20vw;
+
+}
+
+& strong { 
+    font-weight : bolder;
+}
+
 `
 
 
@@ -73,8 +88,22 @@ export default function Header({selectedItems,setSelectedItems}){
         )
     }
 
-    function countDec(){
-
+    
+    function countDec(product){
+        setSelectedItems((prevItems) => {
+            let z = prevItems.find((ele) => ele.product == product);
+            if(z.quantity == 1){
+                const Arr1 = (prevItems.filter((ele) => ele !== z));
+                return Arr1;
+            }
+            return prevItems.map((item) => {
+                if(item.product === product && item.quantity > 1){
+                    return {...item,quantity : item.quantity - 1}
+                }
+                return item;
+        }   
+    )}
+            )
     }
 
     let sum = 0 ;
@@ -86,14 +115,20 @@ export default function Header({selectedItems,setSelectedItems}){
                 <button onClick={openDialog} className='cart-button'>Cart({selectedItems.length})</button>
                 <dialog ref={DialogRef}>
                     <h1>YOUR CART</h1>
+                    {console.log(selectedItems)}
                     <ul>
                     {selectedItems.map((items,index) => {
-                        sum += items.cost;
-                        return <li key={index}><div>{items.product}</div><div><button onClick={() => countInc(items.product)}>+</button><strong>{items.quantity
-                        }</strong><button onClick={countDec}>-</button></div><div>${items.cost}</div></li>
+                        sum = sum + (items.quantity*(items.cost));
+                        return <li key={index}>
+                                <div className='prodName'>{items.product}</div>
+                                <div><button onClick={() => countInc(items.product)}>+</button>
+                                <strong>{items.quantity}</strong>
+                                <button onClick={() => countDec(items.product)}>-</button></div><div>${items.quantity*(items.cost)}
+                        </div>
+                        </li>
                         })}
                     </ul>
-                    <h3>Cart Total : ${sum}</h3>
+                    <h3>Cart Total : <span>${sum}</span></h3>
                     <button onClick={closeDialog}>Close</button>
                 </dialog>
             </StyleDiv>
